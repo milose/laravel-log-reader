@@ -3,20 +3,27 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+        <div class="col-md-12">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+            @foreach($locations as $location)
+                <!-- start -->
+                <div class="card">
+                    <div class="card-header">{{ $location->name }}</div>
 
-                    You are logged in!
+                    <div class="card-body">
+                        <code>{{ $location->location }}</code>
+                        <ul>
+                            @foreach($location->files as $file)
+                                <li><a target="_blank" href="/location-show/{{ $file['url'] }}">{{ $file['name'] }}</a></li>
+                            @endforeach
+                        </ul>
+                    </div>
                 </div>
-            </div>
+
+                <div>&nbsp;</div>
+                <!-- end -->
+            @endforeach
+
         </div>
     </div>
 </div>
